@@ -11,7 +11,7 @@ package bat.algorithms.math;
  *    边界条件：特殊用例，乘数为0的情况
  *    考察点:
  *    编程功底，Java语言熟练程度，本题中大数相乘问题的分析能力，如两个数相乘的积位数不会超过两个乘数位数之和，从计
- *    算过程中得出规律
+ *    算过程中得出乘法计算的规律
  * */
 
 public class BigIntegerMultiply {
