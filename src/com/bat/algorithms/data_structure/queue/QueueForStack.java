@@ -1,4 +1,4 @@
-package bat.algorithms.data_structure.stack;
+package bat.algorithms.data_structure.queue;
 
 import java.util.LinkedList;
 import java.util.Queue;

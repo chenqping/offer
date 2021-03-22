@@ -1,4 +1,4 @@
-package bat.algorithms.data_structure.queue;
+package bat.algorithms.data_structure.stack;
 
 import java.util.Stack;
 
