@@ -77,13 +77,6 @@ public class BiTreeOps {
         List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
         TreeNode tn = root;
-        /*
-         *  while循环条件的几种情况说明：
-         *  1. tn和stack都为空：遍历完毕
-         *  2. tn不为空，stack为空：初始状态，从根节点开始；
-         *  3. tn为空，stack不为空： 遇到了左或右子节点为空；
-         *  4. tn和stack都不为空：在沿着最左分支往下访问
-         * */
         while (tn != null || !stack.isEmpty()) {
             if (tn != null) {
                 list.add(tn.val);
@@ -94,30 +87,6 @@ public class BiTreeOps {
                 tn = tn.right;
             }
         }
-/*        while( tn != null || !stack.isEmpty()){
-            while(tn != null){
-                list.add(tn.val);
-                stack.push(tn);
-                tn = tn.left;
-            }
-            while(!stack.isEmpty() && tn == null){
-                tn = stack.pop().right;
-            }
-        }*/
-        /*
-        stack.push(root);
-        while(!stack.isEmpty()){
-            TreeNode tn;
-            while((tn = stack.peek()) != null){
-                list.add(tn.val);
-                stack.push(tn.left);
-            }
-            stack.pop();
-            if(!stack.isEmpty()){
-                tn = stack.pop();
-                stack.push(tn.right);
-            }
-        }*/
         return list;
     }
 
@@ -145,30 +114,6 @@ public class BiTreeOps {
                 tn = tn.right;
             }
         }
-/*        while( tn != null || !stack.isEmpty()){
-            while(tn != null){
-                stack.push(tn);
-                tn = tn.left;
-            }
-            while(!stack.isEmpty() && tn == null){
-                tn = stack.pop();
-                list.add(tn.val);
-                tn = tn.right;
-            }
-        }*/
-/*        stack.push(root);
-        while(!stack.isEmpty()){
-            TreeNode tn;
-            while((tn = stack.peek()) != null){
-                stack.push(tn.left);
-            }
-            stack.pop();
-            if(!stack.isEmpty()){
-                tn = stack.pop();
-                list.add(tn.val);
-                stack.push(tn.right);
-            }
-        }*/
         return list;
     }
 
