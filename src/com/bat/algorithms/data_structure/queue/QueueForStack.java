@@ -3,6 +3,10 @@ package bat.algorithms.data_structure.queue;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/*
+*   使用两个队列实现栈
+* */
+
 public class QueueForStack {
     private Queue<Integer> queue1;
     private Queue<Integer> queue2;

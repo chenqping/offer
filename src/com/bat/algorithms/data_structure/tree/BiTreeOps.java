@@ -28,10 +28,13 @@ public class BiTreeOps {
         System.out.println("non-recursive in-order Traverse: " + inList2);
         System.out.println("recursive post-order traverse: " + postList);
         System.out.println("non-recursive post-order traverse: " + postList2);
-        System.out.println("seq-order traverse: "+ seqList);
+        System.out.println("seq-order traverse: " + seqList);
         System.out.println("height: " + height);
     }
 
+    /*
+     *  构造的是完全二叉树
+     * */
     public static TreeNode CreateBiTree(int[] array) {
         List<TreeNode> nodeList = new ArrayList<>();
         for (int i = 0; i < array.length; i++) {
@@ -180,9 +183,16 @@ public class BiTreeOps {
     }
 
     /**
-     * 后序遍历麻烦的地方是什么时候访问节点，在访问节点右子节点之前不能访问根节点
-     * 一种是访问叶子节点，即左右孩子为空；
-     * 当前访问节点的右子节点是上一次访问的节点
+     * 后序遍历先访问左右子树，最后访问根节点，如下树
+     * A
+     * / \
+     * B   C
+     * \
+     * D
+     * 先将左路A,B依次入栈，从最左边的节点B开始，B的左子树为空，右子树非空，所以B暂时不能访问，需要先访
+     * 问右子树D，同样先将D入栈，D由于没有左右孩子(相当于此时左右子树已经访问完毕)，可以访问D节点了，D出
+     * 栈，记录D的值，此时还需要记录pre，再次回到B时，B虽然有右孩子，但是右孩子已经访问过，可以访问B的值。
+     * 因此后序遍历非递归的实现需要设置一个pre记录前次访问的节点，以便于判断右孩子是否已经访问完毕。
      */
     public static List<Integer> NonRecursivePostOrderTraverse(TreeNode root) {
         List<Integer> list = new ArrayList<>();
@@ -215,7 +225,7 @@ public class BiTreeOps {
         queue.offer(root);
         while (!queue.isEmpty()) {
             int count = queue.size();
-            while (count > 0){
+            while (count > 0) {
                 TreeNode tn = queue.poll();
                 list.add(tn.val);
                 if (tn.left != null) {
@@ -224,26 +234,47 @@ public class BiTreeOps {
                 if (tn.right != null) {
                     queue.offer(tn.right);
                 }
-                count --;
+                count--;
             }
         }
         return list;
     }
 
     /*
-    *  根据前序序列和中序序列重建二叉树
-    * */
-    public static TreeNode RecreateBiTree(int[] pre, int[] in, int i, int j, int m, int n){
+     *  根据前序序列和中序序列重建二叉树
+     * */
+    public static TreeNode RecreateBiTree(int[] pre, int[] in, int i, int j, int m, int n) {
         return null;
     }
 
     /*
-    *  求二叉树的高度
-    * */
-    public  static int Height(TreeNode root){
-        if(root == null){
+     *  寻找树中的节点，假设节点值不重复
+     * */
+    public static TreeNode FindNode(TreeNode root, int n) {
+        if (root == null) {
+            return null;
+        }
+        if (root.val == n) {
+            return root;
+        }
+        TreeNode left = FindNode(root.left, n);
+        TreeNode right = FindNode(root.right, n);
+        if (left != null) {
+            return left;
+        }
+        if (right != null) {
+            return right;
+        }
+        return null;
+    }
+
+    /*
+     *  求二叉树的高度
+     * */
+    public static int Height(TreeNode root) {
+        if (root == null) {
             return 0;
-        }else{
+        } else {
             int lh = Height(root.left);
             int rh = Height(root.right);
             return 1 + (lh > rh ? lh : rh);
@@ -251,14 +282,14 @@ public class BiTreeOps {
     }
 
     /*
-    *  求给定二叉树的镜像
-    * */
-    public static TreeNode Mirror(TreeNode root){
+     *  求给定二叉树的镜像
+     * */
+    public static TreeNode Mirror(TreeNode root) {
         return null;
     }
 
     /*
-    *  对称的二叉树
-    * */
+     *  对称的二叉树
+     * */
 
 }

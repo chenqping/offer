@@ -2,6 +2,10 @@ package bat.algorithms.data_structure.stack;
 
 import java.util.Stack;
 
+/*
+*   使用两个栈实现队列
+* */
+
 public class StackForQueue {
     private Stack<Integer> stack1;
     private Stack<Integer> stack2;
