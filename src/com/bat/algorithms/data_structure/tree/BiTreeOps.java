@@ -1,8 +1,5 @@
 package bat.algorithms.data_structure.tree;
 
-import bat.algorithms.data_structure.linked_list.ListNode;
-import com.sun.source.tree.Tree;
-
 import java.util.*;
 
 /**
@@ -12,8 +9,10 @@ import java.util.*;
 public class BiTreeOps {
 
     public static void main(String[] args) {
-        int[] a = {0, 1, 2, 3, 4, 5, 6, 7};
-        TreeNode root = CreateBiTree(a);
+//        int[] a = {0, 1, 2, 3, 4, 5, 6, 7};
+//        TreeNode root = CreateBiTree(a);
+        Scanner scanner = new Scanner(System.in);
+        TreeNode root = CreateBiTree(scanner);
         List<Integer> preList = RecursivePreOrderTraverse(root);
         List<Integer> preList2 = NonRecursivePreOrderTraverse(root);
         List<Integer> inList = RecursiveInOrderTraverse(root);
@@ -50,6 +49,33 @@ public class BiTreeOps {
             nodeList.get(lastParentIndex).right = nodeList.get(lastParentIndex * 2 + 2);
         }
         return nodeList.get(0);
+    }
+
+    /*
+     *  依前序递归创建二叉树，如要创建如下二叉树
+     *              1
+     *             / \
+     *            2   3
+     *           / \
+     *          4   5
+     *  输入的序列为：1 2 4 # # 5 # # 3 # #
+     * */
+    public static TreeNode CreateBiTree(Scanner scanner) {
+        TreeNode root;
+        String data = scanner.next();
+        if ("#".equals(data)) {  //输入#代表为空节点
+            root = null;
+        } else {
+            try {
+                int value = Integer.parseInt(data);
+                root = new TreeNode(value);
+                root.left = CreateBiTree(scanner);
+                root.right = CreateBiTree(scanner);
+            } catch (NumberFormatException e) {
+                root = null;
+            }
+        }
+        return root;
     }
 
     /*
