@@ -7,9 +7,13 @@ package bat.algorithms.search;
 public class BinSearch {
 
     public static void main(String[] args) {
-        int array[] = {1, 3, 5, 7, 8, 12};
-        System.out.println(binSearch(array, 5));
-        System.out.println(binSearch(array, 9));
+        int[] array1 = {1, 3, 5, 7, 8, 12};
+        int[] array2 = {1};
+        System.out.println(binSearch(array1, 3));
+        System.out.println(binSearch(array1, 9));
+        System.out.println(binSearch(array1, 12));
+        System.out.println(binSearch(array2, 1));
+        System.out.println(binSearch(array2, 2));
     }
 
     public static int binSearch(int[] array, int key) {
