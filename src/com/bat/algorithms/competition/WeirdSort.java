@@ -1,4 +1,4 @@
-package bat.algorithms.games;
+package bat.algorithms.competition;
 import java.util.Scanner;
 
 /*

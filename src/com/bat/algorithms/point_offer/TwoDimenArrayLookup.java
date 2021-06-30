@@ -1,4 +1,4 @@
-package bat.algorithms.data_structure.arrays;
+package bat.algorithms.point_offer;
 
 /*
     剑指offer 2.3.1节二维数组查找练习
