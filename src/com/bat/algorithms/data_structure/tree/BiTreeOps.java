@@ -1,5 +1,6 @@
 package bat.algorithms.data_structure.tree;
 
+import com.sun.source.tree.Tree;
 import java.util.*;
 
 /**
@@ -9,8 +10,6 @@ import java.util.*;
 public class BiTreeOps {
 
     public static void main(String[] args) {
-        int[] a = {0, 1, 2, 3, 4, 5, 6, 7};
-        TreeNode root = createBiTree(a);
         /*
         *   生成一棵如下的完全二叉树：
         *            0
@@ -21,6 +20,8 @@ public class BiTreeOps {
         *       /
         *      7
         * */
+        int[] a = {0, 1, 2, 3, 4, 5, 6, 7};
+        TreeNode root = createBiTree(a);
 //        Scanner scanner = new Scanner(System.in);
 //        TreeNode root = CreateBiTree(scanner);
         List<Integer> list = recursivePreOrderTraverse(root);
@@ -44,11 +45,15 @@ public class BiTreeOps {
         int height = height(root);
         System.out.println("height: " + height);
         int distance = findDistance(root, 7, 5);
-        System.out.println("find distance between 3 and 5 is: " + distance);
+        System.out.println("find distance between 7 and 5 is: " + distance);
+        TreeNode mirrored = mirror(root);
+        list = seqOrderTraverse(mirrored);
+        System.out.println("mirrored tree seq-order traverse: " + list);
+
     }
 
     /*
-     *  构造的是完全二叉树
+     *  将顺序存储的二叉树构转化为链式存储
      * */
     public static TreeNode createBiTree(int[] array) {
         List<TreeNode> nodeList = new ArrayList<>();
@@ -132,6 +137,9 @@ public class BiTreeOps {
         return list;
     }
 
+    /*
+    * 中序遍历递归实现
+    * */
     public static List<Integer> recursiveInOrderTraverse(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root != null) {
@@ -142,6 +150,9 @@ public class BiTreeOps {
         return list;
     }
 
+    /*
+    * 中序遍历非递归
+    * */
     public static List<Integer> nonRecursiveInOrderTraverse(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -159,6 +170,9 @@ public class BiTreeOps {
         return list;
     }
 
+    /*
+    * 后序遍历递归实现
+    * */
     public static List<Integer> recursivePostOrderTraverse(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if (root != null) {
@@ -170,6 +184,7 @@ public class BiTreeOps {
     }
 
     /**
+     * 后序遍历非递归实现
      * 后序遍历先访问左右子树，最后访问根节点，如下树
      *        A
      *       / \
@@ -204,7 +219,7 @@ public class BiTreeOps {
     }
 
     /*
-     *   层序遍历
+     * 层序遍历
      * */
     public static List<Integer> seqOrderTraverse(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
@@ -228,7 +243,7 @@ public class BiTreeOps {
     }
 
     /*
-    *   深度优先遍历，实际上前序，中序和后序都属于深度优先遍历，以下给出的与前序遍历结果相同
+    *  深度优先遍历，实际上前序，中序和后序都属于深度优先遍历，以下给出的与前序遍历结果相同
     * */
     public static List<Integer> depthFirstSearch(TreeNode root){
         List<Integer> list = new ArrayList<>();
@@ -291,7 +306,9 @@ public class BiTreeOps {
 
 
     /*
-     *  寻找树中两个节点之间的距离
+     * 寻找树中两个节点之间的距离，即连接两个节点的边数
+     * 1.先找到两个节点最近的公共祖先
+     * 2.分别求出公共祖先到两个节点的边数，求和就是两个节点的距离
      * */
     public static int findDistance(TreeNode root, int p, int q){
         root = findNode(root, p, q);
@@ -302,7 +319,7 @@ public class BiTreeOps {
     }
 
     /*
-     *  1. 寻找两个节点最近的公共祖先
+     *  寻找两个节点最近的公共祖先
      * */
     public static TreeNode findNode(TreeNode root, int p, int q) {
         if (root == null) {
@@ -326,7 +343,7 @@ public class BiTreeOps {
     }
 
     /*
-    *   2. 求根节点到给定节点值的距离
+    *  求根节点到给定节点值的距离
     * */
     // 定义距离类型，通过对象属性改变参数
     static class Distance{
@@ -374,7 +391,12 @@ public class BiTreeOps {
      *  求给定二叉树的镜像
      * */
     public static TreeNode mirror(TreeNode root) {
-        return null;
+        if(root != null){
+            TreeNode temp = root.left;
+            root.left = mirror(root.right);
+            root.right = mirror(temp);
+        }
+        return root;
     }
 
     /*

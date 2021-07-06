@@ -80,4 +80,8 @@ public class LinkedListOps {
         }
         return list;
     }
+
+    public static void sortList(ListNode pHead){
+
+    }
 }
